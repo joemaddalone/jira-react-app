@@ -1,0 +1,147 @@
+.Ticket {
+	position: relative;
+	cursor: pointer;
+	width: 98%;
+	border-top: 1px solid #cdcdcd;
+	border-right: 1px solid #cdcdcd;
+	height: 80px;
+	padding: 18px 5px 16px 23px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	color: #4a4a4a;
+	background-color: white;
+  }
+  .Ticket.no-jira {
+	height: 45px;
+	padding-top: 14px;
+	padding-bottom: 18px;
+  }
+  .Ticket.success {
+	border-left: 3px solid green;
+  }
+  .Ticket.running {
+	border-left: 3px solid blue;
+  }
+  .Ticket.failure {
+	border-left: 3px solid red;
+  }
+  .Ticket:last-child {
+	border-bottom: 1px solid #cdcdcd;
+  }
+  .Ticket:hover {
+	background-color: #eee;
+  }
+  .Ticket.fetching {
+	cursor: default;
+	border-left: 3px solid #ccc;
+  }
+  .Ticket.fetching .jira-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 32px;
+	background-color: #ccc;
+  }
+  .Ticket.fetching .ticket-summary {
+	background-color: #ccc;
+	height: 18px;
+	width: 85%;
+  }
+  .Ticket.fetching .ticket-state {
+	justify-content: space-between;
+  }
+  .Ticket.fetching .ticket-state .fetching-state {
+	background-color: f #ccc;
+	height: 13px;
+	width: 25%;
+  }
+  .Ticket.fetching:hover {
+	background-color: #fff;
+  }
+  .Ticket .jira-avatar {
+	position: absolute;
+	right: 20px;
+	top: 15px;
+  }
+  .Ticket .jira-avatar img {
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+  }
+  .Ticket .jira-avatar.no-assignee {
+	width: 32px;
+	height: 32px;
+	border-radius: 32px;
+	background-color: #ccc;
+  }
+  .Ticket .ticket-summary {
+	padding-bottom: 12px;
+	width: 80%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  }
+  .Ticket .ticket-summary.fail {
+	color: #ccc;
+  }
+  .Ticket .ticket-state {
+	font-size: 12px;
+	display: flex;
+	width: 85%;
+  }
+  .Ticket .ticket-state .ticket-status,
+  .Ticket .ticket-state .ticket-info {
+	display: flex;
+  }
+  .Ticket .ticket-state .ticket-status {
+	width: 80px;
+  }
+  .Ticket .ticket-state .ticket-status .icon {
+	margin-right: 6px;
+  }
+  .Ticket .ticket-state .ticket-status .icon-text {
+	margin-top: 1px;
+  }
+  .Ticket .ticket-state .ticket-info {
+	width: 120px;
+	margin-top: 1px;
+  }
+  .Ticket .ticket-state .ticket-info .ticket-type {
+	margin-right: 4px;
+  }
+  .Ticket .ticket-state .ticket-info .ticket-type img {
+	width: 14px;
+	height: 14px;
+  }
+  .Ticket .ticket-state .ticket-info .ticket-type .jira-icon-holder {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 14px;
+	height: 14px;
+	background-color: blue;
+	border-radius: 2px;
+  }
+  .Ticket .ticket-state .ticket-info .ticket-type .jira-icon-holder svg {
+	width: 10px;
+	height: 10px;
+	fill: #fff;
+  }
+  .Ticket .ticket-state .ticket-info .ticket-id {
+	margin-top: 1px;
+  }
+  .Ticket .ticket-state .jira-status {
+	margin-top: 2px;
+	border-radius: 3px;
+	color: #ccc;
+	border: 1px solid #ccc;
+	font-size: 10px;
+	padding: 0 3px;
+	height: 14px;
+	line-height: 1.2;
+	text-transform: uppercase;
+	max-width: 100px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  }
