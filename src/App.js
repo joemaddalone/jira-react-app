@@ -15,9 +15,17 @@ class App extends React.Component {
     const { data = null } = e;
     if (data) {
       const { type, value, error } = data;
+      if (error) {
+        this.setState({ jqlResults: null, error: 'there was a problem' });
+      }
+      else {
+        this.setState({ error: null });
+      }
       switch (type) {
         case 'ticketDetails':
-          console.log(value);
+          if (value) {
+            this.setState({ jqlResults: { issues: [JSON.parse(value)] } });
+          }
           break;
         case 'jql':
           if (value && !error) {
@@ -29,6 +37,10 @@ class App extends React.Component {
           break;
         case 'logCheck':
           this.setState({ loggedIn: value });
+          break;
+        case 'projectKeys':
+          const projects = JSON.parse(value).map(v => v.key);
+          this.setState({ projects });
           break;
         default:
           console.log('unknown', type);
@@ -71,6 +83,7 @@ class App extends React.Component {
     }
     this.setState({ postMessageData: { type: 'jql', value } });
   };
+  clearError = () => this.setState({ error: null });
   render() {
     return (
       <div>
@@ -83,7 +96,8 @@ class App extends React.Component {
               : (
                 <div>
                   <p>You is logged in!</p>
-                  <input placeholder="ticket id" type="text" ref={this.ticketField} />
+                  {this.state.projects && <p>Projects: {this.state.projects.join(', ')}</p>}
+                  <input onChange={this.clearError} placeholder="ticket id" type="text" ref={this.ticketField} />
                   <button onClick={this.ticketSearch}>Search for ticket</button>
                   <button onClick={this.jql}>JQL</button>
                   <hr />
@@ -92,6 +106,7 @@ class App extends React.Component {
                       <TicketWithJira ticket={{ status: 'SUCCESS' }} jiraTicket={i} key={i.key} />
                     ))}
                   </div>
+                  <p style={{ color: 'red' }}>{this.state.error}</p>
                 </div>
               )
         }
