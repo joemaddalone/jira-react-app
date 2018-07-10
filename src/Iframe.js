@@ -5,24 +5,42 @@ class Iframe extends React.Component {
 	frame = React.createRef();
 	domain = 'http://localhost:8080';
 	iframeContentPath = 'http://localhost:8080/plugins/servlet/devoptics/load.html';
+	/**
+	 * Setup listeners.
+	 */
 	componentDidMount() {
 		window.addEventListener("message", this.onReceiveMessage);
 		this.frame.current.addEventListener('load', this.onLoad);
 	}
+	/**
+	 * Kill listeners.
+	 */
 	componentWillUnmount() {
 		window.removeEventListener("message", this.onReceiveMessage, false);
 	}
+	/**
+	 * sendMessage on new postMessageData.
+	 */
 	componentWillReceiveProps(nextProps){
 		if(nextProps.postMessageData && nextProps.postMessageData !== this.props.postMessageData){
 			this.sendMessage(nextProps.postMessageData);
 		}
 	}
+	/**
+	 * Message received.
+	 */
 	onReceiveMessage = e => {
 		this.props.handleReceiveMessage(e);
 	}
+	/**
+	 * Send postMessageData.
+	 */
 	sendMessage = (postMessageData) => {
 		this.frame.current.contentWindow.postMessage(postMessageData, this.domain);
 	}
+	/**
+	 * Init.
+	 */
 	onLoad = e => {
 		const frame = this.frame.current.contentWindow;
 		const value = {
